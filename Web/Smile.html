@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>HTML 5 testpagina</title>
+	<meta charset="utf-8" />
+    <link href="../stijl/stijl.css" rel="stylesheet" />
+    <!--Verwijzing cdn jquery !! -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<script>
+(function($){
+    $.fn.extend({ 
+        rotaterator: function(options) {
+ 
+            var defaults = {
+                fadeSpeed: 800, 
+                pauseSpeed: 100,
+        child:null
+            };
+             
+            var options = $.extend(defaults, options);
+         
+            return this.each(function() {
+                  var o =options;
+                  var obj = $(this);                
+                  var items = $(obj.children(), obj);
+          items.each(function() {$(this).hide();})
+          if(!o.child){var next = $(obj).children(':first');
+          }else{var next = o.child;
+          }
+          $(next).fadeIn(o.fadeSpeed, function() {
+            $(next).delay(o.pauseSpeed).fadeOut(o.fadeSpeed, function() {
+              var next = $(this).next();
+              if (next.length == 0){
+                  next = $(obj).children(':first');
+              }
+              $(obj).rotaterator({child : next, fadeSpeed : o.fadeSpeed, pauseSpeed : o.pauseSpeed});
+            })
+          });
+            });
+        }
+    });
+})(jQuery);
+
+
+ $(document).ready(function() {
+        $('#rotate').rotaterator({fadeSpeed:1200, pauseSpeed:300});
+ });
+</script>
+
+<script>
+    
+    $(document).ready(function() {
+    // Configure/customize these variables.
+    var showChar = 100;  // How many characters are shown by default
+    var ellipsestext = "...";
+    var moretext = "Show more >";
+    var lesstext = "Show less";
+    
+
+    $('.more').each(function() {
+        var content = $(this).html();
+ 
+        if(content.length > showChar) {
+ 
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar, content.length - showChar);
+ 
+            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+ 
+            $(this).html(html);
+        }
+ 
+    });
+ 
+    $(".morelink").click(function(){
+        if($(this).hasClass("less")) {
+            $(this).removeClass("less");
+            $(this).html(moretext);
+        } else {
+            $(this).addClass("less");
+            $(this).html(lesstext);
+        }
+        $(this).parent().prev().toggle();
+        $(this).prev().toggle();
+        return false;
+    });
+});
+
+</script>
+
+
+
+</head>
+<body>
+    
+<img src="http://www.clipartbest.com/cliparts/jTx/pAR/jTxpARXrc.gif" alt="Smiling every day is the key of happiness" class="fullscreen">
+
+
+</body>
+</html>
+

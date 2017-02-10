@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+   <title>HTML 5 testpagina</title>
+	<meta charset="utf-8" />
+    <link href="../stijl/stijl.css" rel="stylesheet" />
+    <!--Verwijzing cdn jquery !! -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<script>
+(function($){
+    $.fn.extend({ 
+        rotaterator: function(options) {
+ 
+            var defaults = {
+                fadeSpeed: 800,
+                pauseSpeed: 100,
+        child:null
+            };
+             
+            var options = $.extend(defaults, options);
+         
+            return this.each(function() {
+                  var o =options;
+                  var obj = $(this);                
+                  var items = $(obj.children(), obj);
+          items.each(function() {$(this).hide();})
+          if(!o.child){var next = $(obj).children(':first');
+          }else{var next = o.child;
+          }
+          $(next).fadeIn(o.fadeSpeed, function() {
+            $(next).delay(o.pauseSpeed).fadeOut(o.fadeSpeed, function() {
+              var next = $(this).next();
+              if (next.length == 0){
+                  next = $(obj).children(':first');
+              }
+              $(obj).rotaterator({child : next, fadeSpeed : o.fadeSpeed, pauseSpeed : o.pauseSpeed});
+            })
+          });
+            });
+        }
+    });
+})(jQuery);
+
+
+ $(document).ready(function() {
+        $('#rotate').rotaterator({fadeSpeed:1200, pauseSpeed:300});
+ });
+</script>
+
+<!--Deze Script ↓↓↓ is voor drag and drop functie --> 
+<script> 
+ 
+  function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+
+</script>
+
+
+</head>
+<body>
+    <!-- comment line-->
+    <!--logo bovenaan
+    menubalk
+    navigatiebalk
+    artikel 1
+    kaderstukje 
+    Artikel 2
+    Artikel 3
+    footer-->
+    <div id="wrapper">
+      <header class="dikkerand">
+
+          <div id="logo" class="rondehoeken">
+
+<img src="image/logo.png"  alt ="html5 logo transparant" height=80% /> <!--Bij open tags kan je op het einde van de tag zomaar ne / zetten zie hiernaast -->
+
+
+
+<!--jquery rotate div -->
+<div id="rotate">
+<div>Imagine</div>
+<div>Draw</div>
+<div>Create</div>
+<div>Design!</div>
+
+
+
+</div>
+
+
+          </div>
+
+          <div id="menubalk">
+              <ul>
+                  <li><a href="Index.html">  |Home| </a></li> 
+                  <li class="active"><a href="html5.html"> |Html5| </a></li>
+                  <li><a href="Contact.html"> |Contact| </a></li>
+
+
+
+
+              </ul>
+              
+              <!--Form uitwerken-->
+
+              <form class="rechts">
+                  <input type="text" name="tag" class="tekst" />
+                  <input type="submit" value="Zoeken" class="zoekknop" />
+              </form>
+          </div>
+          
+      </header>
+
+      <div id="nav">
+
+                  <nav class="dikkerand">
+                        <h2> tijdschriften </h2>
+
+                        <p><a href="http://www.humo.be">Humo</a></p>
+                        <p><a href="http://www.knack.be">Knack</a></p>
+                        <p><a href="http://www.nest.be">Nest</a></p>
+
+
+                  </nav>
+
+                  <nav class="dikkerand">
+                        <h2> sites </h2>
+                        <p><a href="http://www.pcmweb.nl">PcM</a></p>
+                        <p><a href="http://www.clickx.be">Clickx</a></p>
+                      
+                  </nav>
+
+                  <nav class="dikkerand">
+                        <h2> devices </h2>
+                        <p><a href="http://www.apple.be">Apple</a></p>
+                        
+                  </nav>  
+     </div>
+
+     <!--hier start de artikel inhoud (in secties weergegeven)-->
+
+     <section class="dikkerand">
+          <article class="rondehoeken">
+
+                      <h2>  Artikel 1 </h2>
+                      
+                            
+<div class="ballon">
+  
+Dit is een tekstballon. <br /> Zonder afbeeldingen.
+
+</div>
+
+                          <p> Korte Tekst artikel </p>
+                          <div class="clearright"></div>
+
+
+          </article>
+
+<article class="rondehoeken">
+
+                      <h2> Audio Muziek van Sam Brown </h2>
+                      
+                       <p>
+
+                            <audio controls volume=min>
+                          {
+
+                            <source src="image/music/Sambrown.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+
+                          }</audio>
+                          <button> USELESS BUTTON (Te vroeg) </button> 
+                        </p>
+
+
+
+
+
+                          <div class="clearright"></div>
+                          
+
+          </article>
+
+<article class="rondehoeken">
+
+                      <h2> Artikel 3 </h2>
+                      
+                             <h2>Drag 'n drop functie </h2>
+
+                      <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+  <img src="image/troll.gif" draggable="true" ondragstart="drag(event)" id="drag1" width="150" height="80">
+</div>
+
+<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+<div id="div3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+                          <div class="clearright"></div>
+                          
+
+          </article>
+                         <div class="clearright"></div>
+
+     </section>
+
+<footer class="dikkerand">
+    
+<p>Deze pagina is 100%s HTML5 en CSS3</p>
+
+</footer>
+
+
+    </div>
+
+
+    
+
+
+</body>
+</html>
+
