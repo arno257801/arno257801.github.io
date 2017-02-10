@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>HTML 5 testpagina</title>
+	<meta charset="utf-8" />
+    <link href="../stijl/stijl.css" rel="stylesheet" />
+    <!--Verwijzing cdn jquery !! -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<script>
+(function($){
+    $.fn.extend({ 
+        rotaterator: function(options) {
+ 
+            var defaults = {
+                fadeSpeed: 800, 
+                pauseSpeed: 100,
+        child:null
+            };
+             
+            var options = $.extend(defaults, options);
+         
+            return this.each(function() {
+                  var o =options;
+                  var obj = $(this);                
+                  var items = $(obj.children(), obj);
+          items.each(function() {$(this).hide();})
+          if(!o.child){var next = $(obj).children(':first');
+          }else{var next = o.child;
+          }
+          $(next).fadeIn(o.fadeSpeed, function() {
+            $(next).delay(o.pauseSpeed).fadeOut(o.fadeSpeed, function() {
+              var next = $(this).next();
+              if (next.length == 0){
+                  next = $(obj).children(':first');
+              }
+              $(obj).rotaterator({child : next, fadeSpeed : o.fadeSpeed, pauseSpeed : o.pauseSpeed});
+            })
+          });
+            });
+        }
+    });
+})(jQuery);
+
+
+ $(document).ready(function() {
+        $('#rotate').rotaterator({fadeSpeed:1200, pauseSpeed:300});
+ });
+</script>
+
+<script>
+    
+    $(document).ready(function() {
+    // Configure/customize these variables.
+    var showChar = 100;  // How many characters are shown by default
+    var ellipsestext = "...";
+    var moretext = "Show more >";
+    var lesstext = "Show less";
+    
+
+    $('.more').each(function() {
+        var content = $(this).html();
+ 
+        if(content.length > showChar) {
+ 
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar, content.length - showChar);
+ 
+            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+ 
+            $(this).html(html);
+        }
+ 
+    });
+ 
+    $(".morelink").click(function(){
+        if($(this).hasClass("less")) {
+            $(this).removeClass("less");
+            $(this).html(moretext);
+        } else {
+            $(this).addClass("less");
+            $(this).html(lesstext);
+        }
+        $(this).parent().prev().toggle();
+        $(this).prev().toggle();
+        return false;
+    });
+});
+
+</script>
+
+
+
+</head>
+<body>
+    <!-- comment line-->
+    <!--logo bovenaan
+    menubalk
+    navigatiebalk
+    artikel 1
+    kaderstukje 
+    Artikel 2
+    Artikel 3
+    footer-->
+    <div id="wrapper">
+      <header class="dikkerand">
+
+          <div id="logo" class="rondehoeken">
+
+<img src="image/logo.png"  alt ="html5 logo transparant" height=80% /> <!--Bij open tags kan je op het einde van de tag zomaar ne / zetten zie hiernaast -->
+
+
+
+<!--jquery rotate div -->
+<div id="rotate">
+<div>Imagine</div>
+<div>Draw</div>
+<div>Create</div>
+<div>Design!</div>
+
+
+
+</div>
+
+
+          </div>
+
+          <div id="menubalk">
+              <ul>
+                  <li class="active" ><a href="Index.html">  |Home| </a></li> 
+                  <li><a href="html5.html"> |Html5| </a></li>
+                  <li><a href="Contact.html"> |Contact| </a></li>
+                  <li><a href="Smile.html"> |Smile| </a></li>
+
+
+              </ul>
+              
+              <!--Form uitwerken-->
+
+              <form class="rechts">
+                  <input type="text" name="tag" class="tekst" />
+                  <input type="submit" value="" class="zoekknop" /> <!--Bij het value is dat de tekst die weergegeven wordt in html ik wis die omdat ik die vervang door een afbeelding , maar mijn afbeelding is te klein dus ik zal de breedte in css veranderen -->
+              </form>
+          </div>
+          
+      </header>
+
+      <div id="nav">
+
+                  <nav class="dikkerand">
+                        <h2> tijdschriften </h2>
+
+                        <p><a href="http://www.humo.be">Humo</a></p>
+                        <p><a href="http://www.knack.be">Knack</a></p>
+                        <p><a href="http://www.nest.be">Nest</a></p>
+
+
+                  </nav>
+
+                  <nav class="dikkerand">
+                        <h2> sites </h2>
+                        <p><a href="http://www.pcmweb.nl">PcM</a></p>
+                        <p><a href="http://www.clickx.be">Clickx</a></p>
+                      
+                  </nav>
+
+                  <nav class="dikkerand">
+                        <h2> devices </h2>
+                        <p><a href="http://www.apple.be">Apple</a></p>
+                        
+                  </nav>  
+     </div>
+
+     <!--hier start de artikel inhoud (in secties weergegeven)-->
+
+     <section class="dikkerand">
+          <article class="rondehoeken">
+
+                      <h2> Artikel 1 </h2>
+                      <aside class="rondehoeken">
+                            <h2>Aside 1 kop </h2>
+                            One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted
+                          </aside>
+                          <p> Gebruik van een goede google MAP API </p>
+
+
+<!--Code die hieronder verschijnt is gegenereerd geweest in https://embedgooglemaps.com/en/ . Heel handige tool voor google map API -->
+
+
+<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:300px;width:300px;'><div id='gmap_canvas' style='height:300px;width:300px;'></div><div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div><div><small><a href="https://termsandcondiitionssample.com">terms and conditions generator</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:10,center:new google.maps.LatLng(50.94990869999999,3.129447099999993),mapTypeId: google.maps.MapTypeId.HYBRID};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(50.94990869999999,3.129447099999993)});infowindow = new google.maps.InfoWindow({content:'<strong>Burgerschool</strong><br>Roeselare, Belgium<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+
+                          <div class="clearright"></div>
+
+
+          </article>
+
+<article class="rondehoeken">
+
+                      <h2> Artikel 2 </h2>
+                      
+                       <p>
+                          <audio controls>
+                          {
+
+                            <source src="image/music/Sambrown.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+
+                          }</audio>
+                        </p>
+
+
+<!--Film in plaatsen -->
+<video width="400" controls>  <!--controls daj besturing hebt play stop etc. controls autoplay automatisch starten -->
+    <source src="image/BigBuckBunny.mp4" type="video/mp4">
+
+Your Browser is too old to play movie
+
+
+</video>
+
+
+
+
+
+                          <div class="clearright"></div>
+                          
+
+          </article>
+
+<article class="rondehoeken">
+
+                      <h2> Artikel 3 </h2>
+                      <aside class="rondehoeken">
+                             <h2>Aside 2 kop </h2>
+                            One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted
+                          </aside>
+                          <span class="more">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </span>
+    <br><br>
+    <div class="more">
+      Morbi placerat imperdiet risus quis blandit. Ut lobortis elit luctus, feugiat erat vitae, interdum diam. Nam sit amet arcu vitae justo lacinia ultricies nec eget tellus. Curabitur id sapien massa. In hac <a href="#">habitasse</a> platea dictumst. Integer tristique leo consectetur libero pretium pretium. Nunc sed mauris magna. Praesent varius purus id turpis iaculis iaculis. Nulla <em>convallis magna nunc</em>, id rhoncus massa ornare in. Donec et feugiat sem, ac rhoncus mauris. Quisque eget tempor massa.
+    </div>
+
+                          <div class="clearright"></div>
+                          
+
+          </article>
+                         <div class="clearright"></div>
+
+     </section>
+
+<footer class="dikkerand">
+    
+<p>Deze pagina is 100%s HTML5 en CSS3</p>
+
+</footer>
+
+
+    </div>
+
+
+    
+
+
+</body>
+</html>
+
